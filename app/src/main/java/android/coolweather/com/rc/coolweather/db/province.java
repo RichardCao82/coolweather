@@ -2,13 +2,11 @@ package android.coolweather.com.rc.coolweather.db;
 
 import org.litepal.crud.DataSupport;
 
-import java.util.IdentityHashMap;
-
 /**
  * Created by kuncao on 7/31/17.
  */
 
-public class province extends DataSupport {
+public class Province extends DataSupport {
 
     private int id;
     private String provinceName;
