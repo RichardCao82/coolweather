@@ -1,10 +1,12 @@
 package android.coolweather.com.rc.coolweather;
 
 import android.app.ActivityManager;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.coolweather.com.rc.coolweather.gson.Forecast;
 import android.coolweather.com.rc.coolweather.gson.Suggestion;
 import android.coolweather.com.rc.coolweather.gson.Weather;
+import android.coolweather.com.rc.coolweather.service.AutoUpdateService;
 import android.coolweather.com.rc.coolweather.util.HttpUtil;
 import android.coolweather.com.rc.coolweather.util.Utility;
 import android.graphics.Color;
@@ -39,10 +41,10 @@ import okhttp3.Response;
 public class WeatherActivity extends AppCompatActivity {
 
     // https://free-api.heweather.com/v5/weather?city=yourcity&key=yourkey
-    //private String g_weather_addr = "https://free-api.heweather.com/v5/weather?";
-    private String g_weather_addr = "http://guolin.tech/api/weather?";
-    private String g_weather_key = "23c2cfee33aa45b182a06dd70462dadc";
-    private String g_bing_pic_addr = "http://guolin.tech/api/bing_pic";
+    //private static String g_weather_addr = "https://free-api.heweather.com/v5/weather?";
+    public static String g_weather_addr = "http://guolin.tech/api/weather?";
+    public static String g_weather_key = "23c2cfee33aa45b182a06dd70462dadc";
+    public static String g_bing_pic_addr = "http://guolin.tech/api/bing_pic";
 
     private ScrollView weatherLayout;
     private TextView titleCity;
@@ -199,6 +201,9 @@ public class WeatherActivity extends AppCompatActivity {
         carWashText.setText(carWash);
         sportText.setText(sport);
         weatherLayout.setVisibility(View.VISIBLE);
+
+        Intent intent = new Intent(this, AutoUpdateService.class);
+        startService(intent);
     }
 
     private void loadBingPic() {
